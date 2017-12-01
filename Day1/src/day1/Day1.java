@@ -20,7 +20,8 @@ public class Day1 {
             System.out.println("Error reading file");
         }
 
-        System.out.println(runTask1());
+        System.out.println("Solution Task 1: " + runTask1());
+        System.out.println("Solution Task 2: " + runTask2());
     }
 
     public static int runTask1() {
@@ -40,6 +41,23 @@ public class Day1 {
         }
 
         return total_task1;
+    }
+
+    public static int runTask2() {
+        String[] arr_input = input.split("");
+        int i = 0;
+        for (String curr : arr_input) {
+            int current = Integer.parseInt(curr);
+            if (i != arr_input.length - 1) {
+                int index = (i + (arr_input.length / 2)) % arr_input.length;
+                if (current == Integer.parseInt(arr_input[index])) {
+                    total_task2 += current;
+                }
+            }
+            i++;
+        }
+
+        return total_task2;
     }
 
 }
