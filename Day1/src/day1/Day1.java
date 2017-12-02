@@ -12,7 +12,11 @@ public class Day1 {
     private static int total_task1 = 0, total_task2 = 0;
 
     public static void main(String[] args) {
-        uri = new File(args[0]);
+        try{
+            uri = new File(args[0]);
+        }catch(ArrayIndexOutOfBoundsException ex){
+            uri = new File("input.txt"); //Default
+        }
 
         try {
             input = Files.readAllLines(uri.toPath()).get(0);
