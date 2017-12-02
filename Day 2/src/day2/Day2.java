@@ -53,7 +53,33 @@ public class Day2 {
     }
 
     private static int runTask2() {
-        return 0;
+        int checksum = 0;
+        for(String line : input){
+            String[] numbers = line.split("\t");
+            ArrayList<Integer> i_numbers = new ArrayList<>();
+            for(String curr : numbers){
+                i_numbers.add(Integer.parseInt(curr));
+            }
+            
+            int division_1 = 0, division_2 = 0;
+            
+            outerloop:
+            for(int curr : i_numbers){
+                for(int curr_i : i_numbers){
+                    if(curr == curr_i){
+                        continue;
+                    }
+                    if(curr % curr_i == 0){ //even
+                        division_1 = curr;
+                        division_2 = curr_i;
+                        break outerloop;
+                    }
+                }
+            }
+            int division = division_1 / division_2;
+            checksum += division;
+        }
+        return checksum;
     }
     
 }
