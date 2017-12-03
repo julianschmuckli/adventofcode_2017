@@ -83,6 +83,32 @@ public class Day3 {
     }
 
     private static int runTask2() {
+        int total = 13000;
+        int[][] data_table = new int[13000][13000];
+        int medium = 13000 / 2;
+        data_table[medium][medium] = 1;
+
+        boolean last_x = true;
+        boolean last_y = true;
+        for (int i = 0; i < input; i++) {
+            if (i % 2 == 0) { //x
+                if (last_x) {
+                    data_table[medium + (i * 2)][medium] = i;
+                    last_x = false;
+                } else {
+                    data_table[medium - (i * 2)][medium] = i;
+                    last_x = true;
+                }
+            } else {
+                if (last_y) {
+                    data_table[medium][medium + (i * 2)] = i;
+                    last_y = false;
+                } else {
+                    data_table[medium][medium - (i * 2)] = i;
+                    last_y = true;
+                }
+            }
+        }
         return 0;
     }
 
