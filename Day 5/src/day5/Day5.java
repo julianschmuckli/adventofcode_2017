@@ -34,6 +34,11 @@ public class Day5 {
     }
 
     private static int runTask1() {
+        jumps.clear();
+        for (String curr : input) {
+            jumps.add(Integer.parseInt(curr));
+        }
+
         int total_steps = 0;
         int i = 0;
         while (true) {
@@ -57,7 +62,35 @@ public class Day5 {
     }
 
     private static int runTask2() {
-        return 0;
+        jumps.clear();
+        for (String curr : input) {
+            jumps.add(Integer.parseInt(curr));
+        }
+
+        int total_steps = 0;
+        int i = 0;
+        while (true) {
+            int curr = 0;
+            try {
+                curr = jumps.get(i);
+            } catch (IndexOutOfBoundsException ex) {
+                break;
+            }
+
+            if (curr == 0) {
+                jumps.set(i, 1);
+            } else {
+                if ((curr) >= 3) {
+                    jumps.set(i, curr - 1);
+                } else {
+                    jumps.set(i, curr + 1);
+                }
+                i += curr;
+            }
+            total_steps++;
+        }
+
+        return total_steps;
     }
 
 }
