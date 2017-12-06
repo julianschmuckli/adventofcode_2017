@@ -90,7 +90,65 @@ public class Day6 {
     }
 
     private static int runTask2() {
-        return 0;
+        int cycles = 0;
+        boolean already_seen = false;
+        ArrayList<int[]> memory_banks_history = new ArrayList<>();
+
+        outerloop:
+        do {
+            int i = 0;
+            int highest_value = 0, highest_value_index = 0;
+
+            for (int curr : memory_banks) {
+                if (curr > highest_value) {
+                    highest_value = curr;
+                    highest_value_index = i;
+                }
+                i++;
+            }
+
+            int index = highest_value_index + 1;
+            if (index >= memory_banks.size()) {
+                index = 0;
+            }
+            for (i = 0; i < highest_value; i++) {
+                memory_banks.set(highest_value_index, memory_banks.get(highest_value_index) - 1);
+                memory_banks.set(index, memory_banks.get(index) + 1);
+
+                if (index >= (memory_banks.size() - 1)) {
+                    index = 0;
+                } else {
+                    index++;
+                }
+            }
+
+            if (already_seen) {
+                cycles++;
+            }
+
+            ArrayList<Integer> temp = memory_banks;
+            int[] temp_arr = new int[temp.size()];
+            int ia = 0;
+            for (int curr : temp) {
+                temp_arr[ia] = curr;
+                ia++;
+            }
+
+            for (int[] curr : memory_banks_history) {
+                if (Arrays.equals(curr, temp_arr)) {
+                    if (already_seen) {
+                        break outerloop;
+                    } else {
+                        memory_banks_history.clear();
+                        already_seen = true;
+                        continue outerloop;
+                    }
+                }
+            }
+
+            memory_banks_history.add(temp_arr);
+        } while (true);
+        return cycles - 1;
     }
 
 }
