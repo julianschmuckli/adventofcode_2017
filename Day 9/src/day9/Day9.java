@@ -69,8 +69,35 @@ public class Day9 {
         return total;
     }
 
-    private static String runTask2() {
-        return "";
+    private static int runTask2() {
+        String input = Day9.input.get(0);
+
+        boolean curr_ignored = false, curr_garb = false;
+        int total = 0;
+        for (char curr : input.toCharArray()) {
+            if (curr_ignored) {
+                curr_ignored = false;
+                continue;
+            }
+            if (curr == '!') {
+                curr_ignored = true;
+                continue;
+            }
+
+            if (curr_garb && curr == '>') {
+                curr_garb = false;
+                continue;
+            } else if (curr_garb) {
+                total++;
+                continue;
+            }
+
+            if (!curr_garb && curr == '<') {
+                curr_garb = true;
+            }
+        }
+
+        return total;
     }
 
 }
